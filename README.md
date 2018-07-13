@@ -3,6 +3,11 @@ CHOPPER
 
 Generates screenshots of UI elements.
 
+Installation
+------------
+
+Type `yarn install` or `npm install`
+
 Usage
 -----
 
