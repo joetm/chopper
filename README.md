@@ -19,5 +19,5 @@ Also supports multiple selectors, e.g. 'header,footer'.
 Examples
 --------
 
-See `yarn demo` and `yarn tagesschau`.
+Run `yarn demo`, `yarn tagesschau`, and `yarn twitter`.
 
