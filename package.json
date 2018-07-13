@@ -7,10 +7,12 @@
   "scripts": {
     "tagesschau": "node ./chopper.js http://www.tagesschau.de div.box",
     "demo": "node ./chopper.js https://blackrockdigital.github.io/startbootstrap-sb-admin-2/pages/index.html div.panel",
+    "twitter": "./chopper.js 'https://twitter.com/search?q=Europe&src=tren' 'li>div.tweet'",
     "start": "npm run demo"
   },
   "dependencies": {
     "babel-preset-stage-0": "^6.24.1",
+    "death": "^1.1.0",
     "fs": "^0.0.1-security",
     "puppeteer": "^1.5.0"
   }

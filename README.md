@@ -16,11 +16,8 @@ Usage
 -----
 
 ```
-node chopper.js http://example.com div
-```
-or simply
-```
-./chopper.js http://example.com div
+./chopper.js http://www.tagesschau.de div.box
+./chopper.js 'https://twitter.com/search?q=Europe&src=tren' 'li>div.tweet'
 ```
 
 *Argument 1*: URL - required
