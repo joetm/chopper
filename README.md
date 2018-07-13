@@ -20,6 +20,10 @@ Usage
 ```
 node chopper.js http://example.com div
 ```
+or simply
+```
+./chopper.js http://example.com div
+```
 
 Argument 1:
 ~~~~~~~~~~~
