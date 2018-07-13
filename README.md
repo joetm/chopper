@@ -23,13 +23,9 @@ or simply
 ./chopper.js http://example.com div
 ```
 
-Argument 1:
-~~~~~~~~~~~
-URL - required
+*Argument 1*: URL - required
 
-Argument 2:
-~~~~~~~~~~~
-Optional DOM selector. Defaults to 'div'.
+*Argument 2*: Optional DOM selector. Defaults to 'div'.
 Also supports multiple selectors, e.g. 'header,footer'.
 
 Examples
