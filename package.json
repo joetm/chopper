@@ -1,20 +1,17 @@
 {
-  "name": "design-judgements",
-  "version": "0.0.1",
-  "main": "index.js",
-  "repository": "https://github.com/joetm/design-judgements.git",
+  "name": "chopper",
+  "version": "1.0.0",
+  "main": "chopper.js",
+  "repository": "https://github.com/joetm/chopper.git",
   "license": "MIT",
   "scripts": {
-    "BAK": "parcel index.html -p 8080 --open",
-    "tagesschau": "node ./screenshot.js http://www.tagesschau.de div.box",
-    "start": "node ./screenshot.js https://joetm.github.io/design-judgements/startbootstrap-sb-admin-2-gh-pages/pages/index.html div.panel"
+    "tagesschau": "node ./chopper.js http://www.tagesschau.de div.box",
+    "demo": "node ./chopper.js https://blackrockdigital.github.io/startbootstrap-sb-admin-2/pages/index.html div.panel",
+    "start": "npm run demo"
   },
   "dependencies": {
     "babel-preset-stage-0": "^6.24.1",
-    "dotenv": "^6.0.0",
     "fs": "^0.0.1-security",
-    "heatmap.js": "^2.0.5",
-    "parcel-bundler": "^1.9.3",
     "puppeteer": "^1.5.0"
   }
 }
