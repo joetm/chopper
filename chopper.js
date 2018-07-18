@@ -3,6 +3,7 @@
 
   const puppeteer = require('puppeteer');
   const fs = require('fs');
+  const argv = require('yargs').argv;
   const ON_DEATH = require('death')({uncaughtException: true});
 
   // detect Ctrl+C
@@ -71,10 +72,33 @@
         // console.log(element);
         const bbox = await element.boundingBox();
         if (!bbox || !bbox.width || !bbox.height) {
-          console.log(bbox, '- skipping.');
+          console.log(bbox, '... skipping.');
           continue;
         }
         console.log(bbox);
+
+    		if (argv.lorem || argv.replace) {
+    			// replace any texts with lorem ipsum
+    			const nodes = await page.$$('*');
+          nodes.forEach(node => {
+            node.getProperty('innerHTML').then(txt => {
+              txt.jsonValue().then(p => {
+                let replTxt = p.replace(/<.*>/ig, "");
+                const txtLength = replTxt.length;
+                if (txtLength === p.length) {
+                  replTxt = replTxt.replace(/[a-z]/ig, "X");
+                  console.log('pure text element:', replTxt);
+                  // replacement
+                  // page.evaluate((node, replTxt) => {
+                    // console.log(node.innerHTML);
+                    // node.value = replTxt;
+                  // }, node, replTxt);
+                }
+              });
+            });
+          });
+    		}
+
         const screenshot = await page.screenshot({
           'path': `./img/test-${counter}.png`,
           'fullPage': false,
