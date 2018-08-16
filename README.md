@@ -1,6 +1,8 @@
 CHOPPER
 =======
 
+![Chopper](https://raw.githubusercontent.com/joetm/chopper/master/choppa.jpg "Get to da choppa!")
+
 Generates screenshots of UI elements.
 
 Installation
