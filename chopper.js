@@ -6,6 +6,8 @@
   const argv = require('yargs').argv;
   const ON_DEATH = require('death')({uncaughtException: true});
 
+  const prefix = 'img';
+
   // detect Ctrl+C
   ON_DEATH(function(signal, err) {
     console.error(`Aborted by user. [${signal} ${err}]`);
@@ -27,6 +29,17 @@
     fs.rmdirSync(dirPath);
   };
 
+  // https://stackoverflow.com/a/442474/426266
+  // const getOffset = function(el) {
+  //     var _x = 0;
+  //     var _y = 0;
+  //     while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+  //         _x += el.offsetLeft - el.scrollLeft;
+  //         _y += el.offsetTop - el.scrollTop;
+  //         el = el.offsetParent;
+  //     }
+  //     return { top: _y, left: _x };
+  // }
 
   // check cmd arguments for url
   if (process.argv[2] === undefined) {
@@ -56,6 +69,7 @@
 
 
   (async () => {
+
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
       await page.goto(URL);
@@ -67,8 +81,6 @@
       let counter = 0;
       for (const element of elements) {
         counter++;
-
-        // console.log(element);
 
         // --lorem or --replace arguments
         // if (argv.lorem || argv.replace) {
@@ -94,8 +106,10 @@
         }
         console.log(bbox);
 
+        const filename = `${prefix}-${counter}`;
+
         const screenshot = await page.screenshot({
-          'path': `./img/test-${counter}.png`,
+          'path': `./img/${filename}.png`,
           'fullPage': false,
           'clip': {
             x: bbox.x,
@@ -104,6 +118,62 @@
             height: bbox.height,
           },
         });
+
+
+        // capture the properties of all elements inside the current one
+
+        const divCount = await element.$$eval('div', divs => divs.length );
+
+        // const innerNodes = await element.$$('*');
+        const innerNodes = await element.$$eval('*', els => {
+          return els.map(el => {
+            // let _x = 0;
+            // let _y = 0;
+            // while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+            //     _x += el.offsetLeft - el.scrollLeft;
+            //     _y += el.offsetTop - el.scrollTop;
+            //     el = el.offsetParent;
+            // }
+            return {
+              width: el.width,
+              height: el.height,
+              offsetTop: el.offsetTop,
+              offsetLeft: el.offsetLeft,
+              style: getComputedStyle(el),
+              // left: _x,
+              // top: _y,
+              // html: el.outerHTML,
+            };
+          });
+        });
+
+        // console.log('=====');
+        // console.log(innerNodes);
+
+        // for (const n of innerNodes) {
+        //   console.log('=====');
+        //   console.log(n);
+        // }
+
+        // const nodes = []
+
+        // save the metadata
+        const metadata = {
+          filename: `${filename}.png`,
+          bbox,
+          divCount,
+          nodes: innerNodes,
+          contents: [],
+        }
+
+        // console.log(metadata);
+
+        fs.writeFile(`./img/${filename}.json`, JSON.stringify(metadata), 'utf8', () => {
+          // console.log(`written ${filename}.json`);
+
+
+        });
+
       }
 
       await browser.close();
