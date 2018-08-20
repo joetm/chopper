@@ -135,8 +135,8 @@
             //     el = el.offsetParent;
             // }
             return {
-              width: el.width,
-              height: el.height,
+              width: el.width || el.clientWidth,
+              height: el.height || el.clientHeight,
               offsetTop: el.offsetTop,
               offsetLeft: el.offsetLeft,
               style: getComputedStyle(el),
