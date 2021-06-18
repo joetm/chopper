@@ -101,10 +101,13 @@
         // } //if
 
         const bbox = await element.boundingBox();
+
+        // skip if element is not visible
         if (!bbox || !bbox.width || !bbox.height) {
           console.log(bbox, '... skipping.');
           continue;
         }
+
         console.log(bbox);
 
         const filename = `${prefix}-${counter}`;
@@ -120,9 +123,7 @@
           },
         });
 
-
         // capture the properties of all elements inside the current one
-
         const divCount = await element.$$eval('div', divs => divs.length );
 
         // const innerNodes = await element.$$('*');
@@ -148,15 +149,10 @@
           });
         });
 
-        // console.log('=====');
-        // console.log(innerNodes);
-
         // for (const n of innerNodes) {
         //   console.log('=====');
         //   console.log(n);
         // }
-
-        // const nodes = []
 
         // save the metadata
         const metadata = {
@@ -167,12 +163,8 @@
           contents: [],
         }
 
-        // console.log(metadata);
-
         fs.writeFile(`./img/${filename}.json`, JSON.stringify(metadata), 'utf8', () => {
           // console.log(`written ${filename}.json`);
-
-
         });
 
       }
