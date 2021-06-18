@@ -6,6 +6,7 @@
   const argv = require('yargs').argv;
   const ON_DEATH = require('death')({uncaughtException: true});
 
+  const IMGDIR = './img/';
   const prefix = 'img';
 
   // detect Ctrl+C
@@ -50,7 +51,7 @@
 
 
   // what to extract?
-  // defaults
+  // defaults to div
   let DIV_TO_QUERY = 'div';
   if (process.argv[3] !== undefined) {
     DIV_TO_QUERY = process.argv[3];
@@ -61,7 +62,6 @@
 
 
   // clear the img folder first
-  const IMGDIR = './img/';
   rmDir(IMGDIR);
   if (!fs.existsSync(IMGDIR)){
     fs.mkdirSync(IMGDIR);
@@ -69,6 +69,7 @@
 
 
   (async () => {
+  try {
 
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
@@ -177,6 +178,10 @@
       }
 
       await browser.close();
+
+  } catch (error) {
+    console.error(error);
+  }
   })();
 
 }();

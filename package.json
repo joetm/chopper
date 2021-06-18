@@ -5,7 +5,7 @@
   "repository": "https://github.com/joetm/chopper.git",
   "license": "MIT",
   "scripts": {
-    "tagesschau": "node ./chopper.js http://www.tagesschau.de div.box",
+    "tagesschau": "node ./chopper.js https://www.tagesschau.de/ div.box",
     "demo": "node ./chopper.js https://blackrockdigital.github.io/startbootstrap-sb-admin-2/pages/index.html div.panel",
     "twitter": "./chopper.js 'https://twitter.com/search?q=Europe&src=tren' 'li>div.tweet'",
     "start": "npm run demo"

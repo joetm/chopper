@@ -21,7 +21,7 @@ Usage
 *Argument 1*: URL - required
 
 *Argument 2*: Optional DOM selector. Defaults to 'div'.
-Also supports multiple selectors, e.g. 'header,footer'.
+Also supports multiple selectors separated by comma, e.g. 'header,footer'.
 
 Examples
 --------
